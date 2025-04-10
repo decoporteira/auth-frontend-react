@@ -1,8 +1,10 @@
-// src/App.js
+
 import React, { useState } from 'react'
+import Home from './pages/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import ProtectedPage from './pages/ProtectedPage'
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'))
@@ -21,6 +23,7 @@ function App() {
         </>
       ) : (
         <>
+          <Home />
           <Login onLogin={() => setIsAuthenticated(true)} />
           <Register />
         </>

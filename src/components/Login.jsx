@@ -1,4 +1,3 @@
-// src/Login.jsx
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -22,10 +21,14 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <form onSubmit={submit}>
+    <>
+    <h2>Login</h2>
+     <form onSubmit={submit}>
       <input placeholder="Email" value={email_address} onChange={e => setEmail(e.target.value)} />
       <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} />
       <button type="submit">Login</button>
     </form>
+    </>
+   
   );
 }

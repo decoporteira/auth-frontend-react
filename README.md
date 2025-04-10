@@ -1,12 +1,72 @@
-# React + Vite
+# 🔐 Autenticação com Ruby on Rails 8 + React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de autenticação API-first desenvolvido com **Ruby on Rails 8** no backend e **React.js** no frontend. Ele foi feito com fins de aprendizado e para compor meu portfólio.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📚 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+### Backend (Rails API)
+- Ruby 3.3.6
+- Rails 8 (modo API)
+- Autenticação nativa do Rails (`has_secure_password` e `authenticate_by`)
+- CORS com `rack-cors`
+- Serialização JSON
+- Middleware personalizado para sessões
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend (React)
+- React 19.0
+- Vite
+- React Router DOM
+- Fetch API com token JWT no header
+- Controle de sessão com `localStorage`
+
+---
+
+## 🚀 Como rodar o projeto
+
+### Backend (Rails)
+
+Repositório: [https://github.com/decoporteira/authentication](https://github.com/decoporteira/authentication)
+
+```bash
+
+git clone https://github.com/decoporteira/authentication.git
+cd authentication
+
+bundle install
+
+rails db:create db:migrate
+
+rails server
+
+```
+### Frontend (React JS)
+Repositório: [https://github.com/decoporteira/auth-frontend-react](https://github.com/decoporteira/auth-frontend-react)
+
+# Vá para a pasta frontend
+```bash
+git clone https://github.com/decoporteira/auth-frontend-react.git
+
+cd auth-frontend-react
+
+npm install
+
+npm run dev
+
+```
+## 🔐 Como funciona a autenticação
+
+O usuário faz login via React e envia as credenciais para a API (POST /sessions)
+
+O backend responde com um token de sessão
+
+O token é armazenado no localStorage
+
+Todas as requisições protegidas devem incluir o token no header:
+
+```bash
+Authorization: Bearer <token>
+```
+
+O backend valida o token e retorna os dados protegidos

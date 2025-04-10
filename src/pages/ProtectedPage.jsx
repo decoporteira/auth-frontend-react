@@ -13,6 +13,7 @@ export default function ProtectedPage() {
 
   return (
     <div>
+        
       <h2>Área Protegida</h2>
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
