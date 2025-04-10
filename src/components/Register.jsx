@@ -10,11 +10,11 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await api.post('/signup', {
-        email,
+      await api.post('/users',  { user: {
+        email_address: email,
         password,
         password_confirmation: passwordConfirmation
-      })
+      }})
       alert('Usuário criado com sucesso!')
     } catch (err) {
       alert('Erro ao criar usuário')

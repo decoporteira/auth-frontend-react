@@ -8,10 +8,10 @@ export default function Login({ onLogin }) {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/sessions', {
+      const res = await axios.post('http://localhost:3000/sessions', { session: {
         email_address,
         password
-      });
+      }});
       const token = res.data?.data?.token;
       localStorage.setItem('token', token);
       onLogin(token);
