@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import { login } from '../services/Api'
 
 export default function Login({ onLogin }) {
   const [email_address, setEmail] = useState('');
@@ -8,27 +8,35 @@ export default function Login({ onLogin }) {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/sessions', { session: {
-        email_address,
-        password
-      }});
-      const token = res.data?.data?.token;
+      const token = await login(email_address, password);
       localStorage.setItem('token', token);
       onLogin(token);
     } catch (err) {
+      console.error('Erro no login:', err);
       alert('Credenciais inválidas');
     }
   };
 
   return (
     <>
-    <h2>Login</h2>
-     <form onSubmit={submit}>
-      <input placeholder="Email" value={email_address} onChange={e => setEmail(e.target.value)} />
-      <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
-    </form>
+      <h2>Login</h2>
+      <form onSubmit={submit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email_address}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
     </>
-   
   );
 }

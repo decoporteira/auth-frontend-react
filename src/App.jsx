@@ -1,30 +1,45 @@
 
-import React, { useState } from 'react'
-import Home from './pages/Home'
+import React, { useState, useEffect } from 'react'
 import Login from './components/Login'
+import Home from './pages/Home'
 import Register from './components/Register'
 import ProtectedPage from './pages/ProtectedPage'
 
 
+
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'))
+  const [token, setToken] = useState(null)
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem('token')
+    if (savedToken) {
+      setToken(savedToken)
+    }
+  }, [])
+
+  const handleLogin = (token) => {
+    setToken(token) 
+  }
 
   const handleLogout = () => {
+
     localStorage.removeItem('token')
-    setIsAuthenticated(false)
+    setToken(null)
   }
 
   return (
     <div>
-      {isAuthenticated ? (
+
+      {token ? (
         <>
-          <button onClick={handleLogout}>Sair</button>
-          <ProtectedPage />
+          <button onClick={handleLogout}>Logout</button>
+          < ProtectedPage />
+
         </>
       ) : (
         <>
-          <Home />
-          <Login onLogin={() => setIsAuthenticated(true)} />
+         <Home />
+          <Login onLogin={handleLogin} />
           <Register />
         </>
       )}
