@@ -26,4 +26,21 @@ export const login = async (email_address, password) => {
     throw error
   }
 }
+
+export const register = async (email_address, password, password_confirmation) => {
+  try {
+    const response = await api.post('/users', {
+      user: {
+        email_address,
+        password,
+        password_confirmation
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.error('Erro no registro:', error)
+    throw error
+  }
+}
+  
 export default api

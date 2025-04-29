@@ -1,6 +1,7 @@
 // src/components/Register.js
 import React, { useState } from 'react'
-// import api from '../services/Login'
+
+import { register } from '../services/Api'
 
 export default function Register() {
   const [email, setEmail] = useState('')
@@ -10,11 +11,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await api.post('/users',  { user: {
-        email_address: email,
-        password,
-        password_confirmation: passwordConfirmation
-      }})
+     const response = await register(email, password, passwordConfirmation);
       alert('Usuário criado com sucesso!')
     } catch (err) {
       alert('Erro ao criar usuário')
