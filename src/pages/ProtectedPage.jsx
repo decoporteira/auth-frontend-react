@@ -7,7 +7,7 @@ export default function ProtectedPage() {
   const [data, setData] = useState([])
 
   useEffect(() => {
-   api.get('/users')
+   api.get('/projects')
       .then(response => setData(response.data))
       .catch(() => alert('Acesso negado'))
   }, [])
@@ -19,20 +19,20 @@ export default function ProtectedPage() {
     <thead>
       <tr>
         <th>ID</th>
-        <th>Email</th>
-        <th>Password Digest</th>
+        <th>Nome</th>
+        <th>Descrição</th>
         <th>Criado em</th>
         <th>Atualizado em</th>
       </tr>
     </thead>
     <tbody>
-      {data.map(user => (
-        <tr key={user.id}>
-          <td>{user.id}</td>
-          <td>{user.email_address}</td>
-          <td>{user.password_digest}</td>
-          <td>{new Date(user.created_at).toLocaleString()}</td>
-          <td>{new Date(user.updated_at).toLocaleString()}</td>
+      {data.map(project => (
+        <tr key={project.id}>
+          <td>{project.id}</td>
+          <td>{project.title}</td>
+          <td>{project.description}</td>
+          <td>{new Date(project.created_at).toLocaleString()}</td>
+          <td>{new Date(project.updated_at).toLocaleString()}</td>
         </tr>
       ))}
     </tbody>
