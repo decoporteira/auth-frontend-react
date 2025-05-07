@@ -21,7 +21,7 @@ export default function Login({ onLogin }) {
 
   return (
     <>
-      <div className="mb-10 mt-5">
+      <div>
         <form onSubmit={submit} className="max-w-sm mx-auto">
           <h2 className="text-4xl font-bold dark:text-white pb-2">Login</h2>
           <Input

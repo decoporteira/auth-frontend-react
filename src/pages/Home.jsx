@@ -1,10 +1,11 @@
 import React from "react";
+import Login from "../components/Login";
 
 export default function Home() {
   return (
-    <div className="mb-10 mt-10">
+    <div>
       <h1 className="text-5xl font-bold dark:text-white pb-5">
-        Bem-vindo à nossa aplicação!
+        <p className="text-center">Bem-vindo à nossa aplicação!</p>
       </h1>
     </div>
   );
