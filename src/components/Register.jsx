@@ -4,6 +4,7 @@ import { register } from "../services/Api";
 import validate from "../services/Validate";
 import Input from "./Inputs/Input";
 import Button from "./Buttons/Button";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -11,6 +12,11 @@ export default function Register() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [inputTypePassword, setInputTypePassword] = useState("password");
+  const [inputTypeConfPassword, setInputTypeConfPassword] =
+    useState("password");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +43,19 @@ export default function Register() {
     }
   };
 
+  const togglePasswordVisibility = (name) => {
+    if (name === "inputTypePassword") {
+      setShowPassword(!showPassword);
+      setInputTypePassword(
+        inputTypePassword === "password" ? "text" : "password"
+      );
+    } else {
+      setShowConfPassword(!showConfPassword),
+        setInputTypeConfPassword(
+          inputTypeConfPassword === "password" ? "text" : "password"
+        );
+    }
+  };
   return (
     <div className="mb-5 mt-5">
       <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
@@ -50,20 +69,40 @@ export default function Register() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <Input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Senha"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          required
-        />
+        <div className="relative">
+          <Input
+            type={inputTypePassword}
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => togglePasswordVisibility("inputTypePassword")}
+            text="Ver senha"
+            className="absolute right-3 top-3 text-gray-500"
+          >
+            {showPassword ? <FiEyeOff /> : <FiEye />}
+          </button>
+        </div>
+        <div className="relative">
+          <Input
+            type={inputTypeConfPassword}
+            placeholder="Senha"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => togglePasswordVisibility("inputTypeConfPassword")}
+            text="Ver senha"
+            className="absolute right-3 top-3 text-gray-500"
+          >
+            {showConfPassword ? <FiEyeOff /> : <FiEye />}
+          </button>
+        </div>
         <Button text="Login" />
       </form>
     </div>
