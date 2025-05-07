@@ -17,7 +17,7 @@ Este é um projeto de autenticação API-first desenvolvido com **Ruby on Rails 
 ### Frontend (React)
 - React 19.0
 - Vite
-- React Router DOM
+- Estilos com Tailwind
 - Fetch API com token JWT no header
 - Controle de sessão com `localStorage`
 
